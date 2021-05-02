@@ -54,7 +54,7 @@
                                     <h6 class="m-0 font-weight-bold text-primary">ตรวจสอบข้อมูลด้านล่างว่าถูกต้องครบถ้วน</h6>
                                 </div>
                                 <div class="card-body">
-                                    <form class="user" method="POST" action="save_leader.php">
+                                    <form class="user" method="POST" action="update-profile.php">
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <input type="text" class="form-control form-control-user" id="FirstName" name="FirstName"
