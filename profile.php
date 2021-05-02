@@ -58,11 +58,11 @@
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <input type="text" class="form-control form-control-user" id="FirstName" name="FirstName"
-                                                    placeholder="ชื่อจริง ใส่คำนำหน้าชื่อด้วย" required>
+                                                    placeholder="ชื่อจริง ใส่คำนำหน้าชื่อด้วย" value="<?php echo $result_user['name']; ?>" required>
                                             </div>
                                             <div class="col-sm-6">
                                                 <input type="text" class="form-control form-control-user" id="LastName" name="LastName"
-                                                    placeholder="นามสกุล" required>
+                                                    placeholder="นามสกุล" value="<?php echo $result_user['lastname']; ?>" required>
                                             </div>
                                         </div>                               
                                         
@@ -105,7 +105,7 @@
 
     <!-- Include Modal logout -->
     <?php include "modalLogout.php" ?>
-    <!-- Delete Modal-->
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
