@@ -40,16 +40,19 @@
                             <form class="user" method="POST" action="save_register.php" oninput='RePWD.setCustomValidity(RePWD.value != InPWD.value ? "รหัสผ่านไม่ตรงกัน" : "")'>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                                        <input type="text" class="form-control form-control-user" id="FirstName" name="FirstName"
                                             placeholder="ชื่อจริง ใส่คำนำหน้าชื่อด้วย" required>
                                     </div>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
+                                        <input type="text" class="form-control form-control-user" id="LastName" name="LastName"
                                             placeholder="นามสกุล" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                    <input type="text" class="form-control form-control-user" id="Position" name="Position" placeholder="ตำแหน่งงาน" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control form-control-user" id="Email" name="Email"
                                         placeholder="Email Address" required>
                                 </div>
                                 <div class="form-group row">
