@@ -77,7 +77,7 @@
                                         <div class="form-group row">
                                             <div class="col-sm-8 mb-3 mb-sm-0">
                                                 <label for="Signature">ลายเซ็นดิจิตอล</label>
-                                                <input type="file" class="form-control form-control-user" id="Signature" name="Signature"
+                                                <input type="file" class="form-control" id="Signature" name="Signature"
                                                     placeholder="ลายเซ็นดิจิตอล" required>
                                             </div>
                                         </div>
