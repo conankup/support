@@ -1,4 +1,8 @@
 <?php include"chk_user.php"; ?>
+<?php
+$sqlSector = mysql_query("SELECT * FROM tb_sector");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,20 +64,17 @@
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <label for="exampleFormControlSelect1">เลือกส่วนงาน</label>
-                                                <select class="form-control" id="exampleFormControlSelect1">
-                                                    <option>ส่วนอำนวยการ</option>
-                                                    <option>ส่วนวิชาการ</option>
-                                                    <option>ส่วนท้องฟ้าจำลอง</option>
-                                                    <option>ส่วนอาคารสถานที่</option>
-                                                    <option>ส่วนส่งเสริมและบริการ</option>
+                                                <select name="sector_id" id="sector" class="form-control">
+                                                    <option value="">เลือกส่วนงาน</option>
+                                                    <?php while($result = mysql_fetch_assoc($sqlSector)): ?>
+                                                        <option value="<?=$result['sector_id']?>"><?=$result['sector_name']?></option>
+                                                    <?php endwhile; ?>
                                                 </select>
                                             </div>
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <label for="exampleFormControlSelect1">เลือกงาน</label>
-                                                <select class="form-control" id="exampleFormControlSelect1">
-                                                    <option>งาน1</option>
-                                                    <option>งาน2</option>
-                                                    <option>งาน3</option>
+                                                <select name="job_id" id="job" class="form-control">
+                                                    <option value="">เลือกตำแหน่งงาน</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -139,6 +140,9 @@
         picker_date(document.getElementById("dateJobEnd"),{year_range:"0:+1"});
         /*{year_range:"-12:+10"} คือ กำหนดตัวเลือกปฎิทินให้ แสดงปี ย้อนหลัง 12 ปี และ ไปข้างหน้า 10 ปี*/
     </script>
+
+    <!-- เรียกใช้การเลือกส่วน และงาน -->
+    <script src="js/script.js"></script>
 </body>
 
 </html>

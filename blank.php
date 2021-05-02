@@ -1,3 +1,4 @@
+<?php include"chk_user.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 

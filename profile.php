@@ -20,9 +20,6 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.css" rel="stylesheet">
 
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
 </head>
 
 <body id="page-top">
@@ -54,7 +51,7 @@
                             <!-- Basic Card Example -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">กรุณาใส่ข้อมูลให้ครบถ้วนก่อนคลิกปุ่ม ยืนยัน</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">ตรวจสอบข้อมูลด้านล่างว่าถูกต้องครบถ้วน</h6>
                                 </div>
                                 <div class="card-body">
                                     <form class="user" method="POST" action="save_leader.php">
@@ -63,80 +60,27 @@
                                                 <input type="text" class="form-control form-control-user" id="FirstName" name="FirstName"
                                                     placeholder="ชื่อจริง ใส่คำนำหน้าชื่อด้วย" required>
                                             </div>
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <div class="col-sm-6">
                                                 <input type="text" class="form-control form-control-user" id="LastName" name="LastName"
                                                     placeholder="นามสกุล" required>
                                             </div>
-                                        </div>
+                                        </div>                               
+                                        
                                         <div class="form-group row">
-                                            <div class="col-sm-12 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control-user" id="PositionLeader" name="PositionLeader"
-                                                    placeholder="ชื่อส่วนงาน" required>
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <a href="blank.php" class="btn btn-danger btn-user btn-block">ยกเลิก</a>
+                                            </div>
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <button type="submit" class="btn btn-warning btn-user btn-block" >แก้ไข</button>  
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-8 mb-3 mb-sm-0">
-                                                <label for="Signature">ลายเซ็นดิจิตอล</label>
-                                                <input type="file" class="form-control" id="Signature" name="Signature"
-                                                    placeholder="ลายเซ็นดิจิตอล" required>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block" >ยืนยัน</button>                                                     
+                                                                                           
                                     </form>
                                 </div>
                             </div>
 
                         </div>
-                    </div>
-
-                    <!-- DataTales -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>ชื่อ - นามสกุล</th>
-                                            <th>ชื่อส่วนงาน</th>
-                                            <th>ลายเซ็น</th>
-                                            <th>แก้ไข</th>
-                                            <th>ลบ</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>ชื่อ - นามสกุล</th>
-                                            <th>ชื่อส่วนงาน</th>
-                                            <th>ลายเซ็น</th>
-                                            <th>แก้ไข</th>
-                                            <th>ลบ</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>
-                                                <a href="edit-leader.php" class="btn btn-warning btn-circle btn-sm">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-target="#DeleteModal">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>         
-                                            </td>
-                                        </tr>                                                                                                                                                    
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End DataTales -->
+                    </div>                  
 
                 </div>
                 <!-- /.container-fluid -->
@@ -162,25 +106,6 @@
     <!-- Include Modal logout -->
     <?php include "modalLogout.php" ?>
     <!-- Delete Modal-->
-    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="DeleteModalLabel">ยืนยันการลบข้อมูล</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">ท่านแน่ใจแล้วใช่มั้ยที่จะลบข้อมูลนี้</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="deleteLeader.php">Confirm</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -188,16 +113,6 @@
 
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
 
 </body>
 
