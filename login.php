@@ -64,7 +64,7 @@
                                         <a class="small" href="forgot-password.html">ลืมรหัสผ่าน</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">สร้างบัญชีผู้ใช้ใหม่</a>
+                                        <a class="small" href="register.php">สร้างบัญชีผู้ใช้ใหม่</a>
                                     </div>
                                 </div>
                             </div>

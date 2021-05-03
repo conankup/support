@@ -1,5 +1,5 @@
 <?php
-include('connect.php');
+include "connect.php";
 $sqlJob = "SELECT * FROM tb_job WHERE ref_sector_id={$_GET['sector_id']}";
 $queryJob = mysql_query($sqlJob);
 $jsonJob = array();

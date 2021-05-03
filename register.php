@@ -1,3 +1,8 @@
+<?php
+include "connect.php";
+$sqlSector = mysql_query("SELECT * FROM tb_sector");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,8 +53,22 @@
                                             placeholder="นามสกุล" required>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="Position" name="Position" placeholder="ตำแหน่งงาน" required>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <!-- <label for="exampleFormControlSelect1">เลือกส่วนงาน</label> -->
+                                        <select name="sector_id" id="sector" class="form-control" required>
+                                            <option value="">เลือกส่วนงาน</option>
+                                            <?php while($result = mysql_fetch_assoc($sqlSector)): ?>
+                                                <option value="<?=$result['sector_id']?>"><?=$result['sector_name']?></option>
+                                            <?php endwhile; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <!-- <label for="exampleFormControlSelect1">เลือกงาน</label> -->
+                                        <select name="job_id" id="job" class="form-control" >
+                                            <option value="">เลือกตำแหน่งงาน</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-user" id="Email" name="Email"
@@ -92,6 +111,8 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
+    <!-- เรียกใช้การเลือกส่วน และงาน -->
+    <script src="js/script.js"></script>
 </body>
 
 </html>
