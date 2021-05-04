@@ -19,7 +19,7 @@ $dateToday = date("Y-m-d");
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <meta http-equiv="Refresh" content="3; url='forgot-password.html'" />
     <title>ระบบขอใช้บริการส่วนส่งเสริมและบริการ</title>
 
     <!-- Custom fonts for this template-->
@@ -46,15 +46,21 @@ $dateToday = date("Y-m-d");
 
                 <?php
                 //##### Check Email same
-                $sql_ckEmail = mysql_query("SELECT user_email FROM tb_users");
-                $result_ckEmail = mysql_fetch_array($sql_ckEmail);
-
-                if($inputEmail == $result_ckEmail["user_email"]){
+                $sql_ckEmail = mysql_query("SELECT user_email FROM tb_users WHERE user_email='$inputEmail'");                      
+                if (mysql_num_rows($sql_ckEmail) > 0){
 
                 ?>
-                    <div class="alert alert-danger text-center" style="margin-top: 50px;">
-                        <h4><i class="fa fa-close"></i>ข้อมูลนี้มีอยู่ในระบบแล้ว กรุณาทำรายการใหม่อีกครั้ง</h4> 
-                    </div>
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="p-5">
+                                    <div class="alert alert-danger">
+                                        <strong>ข้อมูลนี้มีอยู่ในระบบแล้ว</strong> กรุณาทำรายการใหม่อีกครั้ง
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
                 <?php
                 }else{
 					$sqlAddRegister = mysql_query("insert into tb_users values ('','$inputEmail','$inputInPWD','$inputName','$inputLname','2','$inputJobID','$dateToday','','')");
@@ -72,8 +78,7 @@ $dateToday = date("Y-m-d");
                         </div>
                     </div>  
                 <?php
-                    }else{
-                        echo"$inputSectorID,$inputJobID";
+                    }else{                 
                 ?>
                     <div class="card-body p-0">
                         <div class="row">
