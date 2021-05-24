@@ -48,89 +48,104 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">จัดการข้อมูลหัวหน้าส่วน</h1>
-                    <div class="row">
-
-                        <div class="col-lg-4">
-                            <!-- Basic Card Example -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">กรุณาใส่ข้อมูลให้ครบถ้วนก่อนคลิกปุ่ม ยืนยัน</h6>
-                                </div>
-                                <div class="card-body">
-                                    <form class="user" method="POST" action="save_leader.php">
-                                        <div class="form-group row">
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control-user" id="FirstName" name="FirstName"
-                                                    placeholder="ชื่อจริง ใส่คำนำหน้าชื่อด้วย" required>
-                                            </div>
-                                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control-user" id="LastName" name="LastName"
-                                                    placeholder="นามสกุล" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-12 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control-user" id="PositionLeader" name="PositionLeader"
-                                                    placeholder="ชื่อส่วนงาน" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-8 mb-3 mb-sm-0">
-                                                <label for="Signature">ลายเซ็นดิจิตอล</label>
-                                                <input type="file" class="form-control" id="Signature" name="Signature"
-                                                    placeholder="ลายเซ็นดิจิตอล" required>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block" >ยืนยัน</button>                                                     
-                                    </form>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
+                    
                     <!-- DataTales -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">รายการผู้ใช้งาน</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>ชื่อ - นามสกุล</th>
-                                            <th>ชื่อส่วนงาน</th>
-                                            <th>ลายเซ็น</th>
-                                            <th>แก้ไข</th>
-                                            <th>ลบ</th>
+                                            <th>ชื่อ - สกุล</th>
+                                            <th>ส่วนงาน</th>
+                                            <th>สถานะสิทธิ์</th>                            
+                                            <th>ให้สิทธิ์หัวหน้าส่วน</th>
+                                            <th>ยกเลิกสิทธิ์</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>ชื่อ - นามสกุล</th>
-                                            <th>ชื่อส่วนงาน</th>
-                                            <th>ลายเซ็น</th>
-                                            <th>แก้ไข</th>
-                                            <th>ลบ</th>
+                                            <th>รายการ</th>
+                                            <th>ส่วนงาน</th>
+                                            <th>สถานะสิทธิ์</th>                                            
+                                            <th>ให้สิทธิ์หัวหน้าส่วน</th>
+                                            <th>ยกเลิกสิทธิ์</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                    <?php
+                                       // $show_User = mysql_query("SELECT * FROM tb_users LEFT JOIN tb_job ON tb_users.ref_job_id = tb_job.job_id");
+                                       $show_User = mysql_query("SELECT * FROM tb_users JOIN tb_job ON tb_users.ref_job_id = tb_job.job_id JOIN tb_sector ON tb_job.ref_sector_id = tb_sector.sector_id");
+                                        while($result_User=mysql_fetch_array($show_User)){
+
+                                        $statusPrivilage = $result_User['privilage'];
+                                        if($statusPrivilage == 5){
+                                            $fasPrivilage = "<a href='#' class='btn btn-success btn-circle btn-sm' disable>
+                                            <i class='fas fa-user-shield'></i></a>";
+                                        
+                                        }else{
+                                            $fasPrivilage = "<a href='#' class='btn btn-primary btn-circle btn-sm'>
+                                            <i class='fas fa-user-shield'></i></a>";
+                                        }
+                                    ?>
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
+                                            <td><?php echo $result_User['name']; ?>&nbsp;&nbsp;&nbsp;<?php echo $result_User['lastname']; ?></td>
+                                            <td><?php echo $result_User['sector_name']; ?></td>     
+                                            <td><?php echo $fasPrivilage; ?></td>                                       
                                             <td>
-                                                <a href="edit-leader.php" class="btn btn-warning btn-circle btn-sm">
-                                                    <i class="fas fa-edit"></i>
+                                                <a href="#" class="btn btn-success btn-circle btn-sm" data-toggle="modal" data-target="#ChangModal-<?php echo $result_User['user_id'];?>">
+                                                    <i class="fas fa-user-shield"></i>
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-target="#DeleteModal">
-                                                    <i class="fas fa-trash"></i>
+                                                <a href="#" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-target="#DeleteModal-<?php echo $result_User['user_id'];?>">
+                                                    <i class="fas fa-user-shield"></i>
                                                 </a>         
                                             </td>
-                                        </tr>                                                                                                                                                    
+                                        </tr>
+                                        <!-- Chang Modal-->
+                                        <div class="modal fade" id="ChangModal-<?php echo $result_User['user_id'];?>" tabindex="-1" role="dialog" aria-labelledby="ChangModalLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="DeleteModalLabel">ยืนยันการให้สิทธิ์หัวหน้าส่วน</h5>
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">ท่านแน่ใจแล้วใช่มั้ยที่จะให้สิทธิ์หัวหน้าส่วนแก่ <?php echo $result_User['name']; ?>&nbsp;&nbsp;&nbsp;<?php echo $result_User['lastname'];  ?></div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                        <a class="btn btn-primary" href="changPrivilage.php?UID=<?php echo $result_User['user_id']; ?>">Confirm</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Delete Modal-->
+                                        <div class="modal fade" id="DeleteModal-<?php echo $result_User['user_id'];?>" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="DeleteModalLabel">ยืนยันการกยกเลิกสิทธิ์หัวหน้าส่วน</h5>
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">ท่านแน่ใจแล้วใช่มั้ยที่จะยกเลิกสิทธิ์หัวหน้าส่วน <?php echo $result_User['name']; ?>&nbsp;&nbsp;&nbsp;<?php echo $result_User['lastname'];  ?></div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                        <a class="btn btn-primary" href="deleteProducts.php?DellPROID=<?php echo $result_User['user_id']; ?>">Confirm</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php } ?>                                                                                                                                                    
                                     </tbody>
                                 </table>
                             </div>
@@ -161,27 +176,7 @@
 
     <!-- Include Modal logout -->
     <?php include "modalLogout.php" ?>
-    <!-- Delete Modal-->
-    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="DeleteModalLabel">ยืนยันการลบข้อมูล</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">ท่านแน่ใจแล้วใช่มั้ยที่จะลบข้อมูลนี้</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="deleteLeader.php">Confirm</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
+    
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

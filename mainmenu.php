@@ -34,20 +34,6 @@
         <span>จัดการข้อมูลของที่เบิกได้</span></a>
 </li>
 
-<!-- Nav Item - Pages Collapse Menu -->
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-        aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Menu1</span>
-    </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">subMenu1</h6>
-            <a class="collapse-item" href="buttons.html">subMenu2</a>
-        </div>
-    </div>
-</li>
 
 <!-- Divider -->
 <hr class="sidebar-divider">
@@ -59,9 +45,18 @@
 
 <!-- Nav Item - Leader -->
 <li class="nav-item">
-    <a class="nav-link" href="leader.php">
-        <i class="fas fa-fw fa-user-tie fa-2x"></i>
-        <span>จัดการข้อมูลหัวหน้าส่วน</span></a>
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#leader"
+        aria-expanded="true" aria-controls="leader">
+        <i class="fas fa-user-shield"></i>
+        <span>ข้อมูลหัวหน้าส่วน</span>
+    </a>
+    <div id="leader" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <!-- <h6 class="collapse-header">subMenu1</h6> -->
+            <a class="collapse-item" href="leader.php">จัดการข้อมูลหัวหน้าส่วน</a>
+            <a class="collapse-item" href="signature.php">จัดการข้อมูลรายเซ็นดิจิตอล</a>
+        </div>
+    </div>
 </li>
 
 <!-- Nav Item - Service -->
