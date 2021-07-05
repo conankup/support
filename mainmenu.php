@@ -29,9 +29,14 @@
 
 <!-- Nav Item - ของที่มีให้เบิก -->
 <li class="nav-item">
-    <a class="nav-link" href="products.php">
+    <a class="nav-link" href="souvenir.php">
         <i class="fas fa-fw fa-list fa-2x"></i>
         <span>จัดการข้อมูลของที่เบิกได้</span></a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="tack-Souvenir.php">
+        <i class="fas fa-fw fa-list fa-2x"></i>
+        <span>เบิกของที่ระลึก</span></a>
 </li>
 
 

@@ -57,7 +57,7 @@
                                     <h6 class="m-0 font-weight-bold text-primary">กรุณาใส่ข้อมูลให้ครบถ้วนก่อนคลิกปุ่ม ยืนยัน</h6>
                                 </div>
                                 <div class="card-body">
-                                    <form class="user" method="POST" action="save_products.php">
+                                    <form class="user" method="POST" action="save-souvenir.php">
                                         <div class="form-group row">
                                             <div class="col-sm-12 mb-3 mb-sm-0">
                                                 <input type="text" class="form-control form-control-user" id="ProductName" name="ProductName"
@@ -104,25 +104,25 @@
                                     </tfoot>
                                     <tbody>
                                     <?php
-                                        $show_Product = mysql_query("SELECT * FROM tb_products");
+                                        $show_Product = mysql_query("SELECT * FROM tb_souvenir");
                                         while($result_Product=mysql_fetch_array($show_Product)){
                                     ?>
                                         <tr>
-                                            <td><?php echo $result_Product['pro_name'] ?></td>
-                                            <td><?php echo $result_Product['pro_number'] ?></td>                                            
+                                            <td><?php echo $result_Product['sou_name'] ?></td>
+                                            <td><?php echo $result_Product['sou_number'] ?></td>                                            
                                             <td>
-                                                <a href="edit-Products.php?PROID=<?php echo $result_Product['pro_id']; ?>" class="btn btn-warning btn-circle btn-sm">
+                                                <a href="edit-souvenir.php?PROID=<?php echo $result_Product['sou_id']; ?>" class="btn btn-warning btn-circle btn-sm">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-target="#DeleteModal-<?php echo $result_Product['pro_id'];?>">
+                                                <a href="#" class="btn btn-danger btn-circle btn-sm" data-toggle="modal" data-target="#DeleteModal-<?php echo $result_Product['sou_id'];?>">
                                                     <i class="fas fa-trash"></i>
                                                 </a>         
                                             </td>
                                         </tr>
                                         <!-- Delete Modal-->
-                                        <div class="modal fade" id="DeleteModal-<?php echo $result_Product['pro_id'];?>" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel"
+                                        <div class="modal fade" id="DeleteModal-<?php echo $result_Product['sou_id'];?>" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel"
                                             aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -132,10 +132,10 @@
                                                             <span aria-hidden="true">×</span>
                                                         </button>
                                                     </div>
-                                                    <div class="modal-body">ท่านแน่ใจแล้วใช่มั้ยที่จะลบข้อมูล <?php echo $result_Product['pro_name']; ?></div>
+                                                    <div class="modal-body">ท่านแน่ใจแล้วใช่มั้ยที่จะลบข้อมูล <?php echo $result_Product['sou_name']; ?></div>
                                                     <div class="modal-footer">
                                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                                        <a class="btn btn-primary" href="deleteProducts.php?DellPROID=<?php echo $result_Product['pro_id']; ?>">Confirm</a>
+                                                        <a class="btn btn-primary" href="delete-souvenir.php?DellPROID=<?php echo $result_Product['sou_id']; ?>">Confirm</a>
                                                     </div>
                                                 </div>
                                             </div>

@@ -3,7 +3,7 @@
 $ProName = $_POST['ProductName'];
 $ProNum = $_POST['ProductNumber'];
 
-$sqlSave = mysql_query("INSERT INTO tb_products VALUES ('','$ProName','$ProNum')");
+$sqlSave = mysql_query("INSERT INTO tb_souvenir VALUES ('','$ProName','$ProNum')");
 
 ?>
 <!DOCTYPE html>
@@ -16,7 +16,7 @@ $sqlSave = mysql_query("INSERT INTO tb_products VALUES ('','$ProName','$ProNum')
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta http-equiv="Refresh" content="2; url='products.php'" />
+    <meta http-equiv="Refresh" content="2; url='souvenir.php'" />
     <?php include "text_title.php"; ?>
 
     <!-- Custom fonts for this template-->

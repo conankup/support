@@ -1,10 +1,8 @@
 <?php include"chk_user.php"; ?>
 <?php
-$PID = $_POST['oldPROID'];
-$PName = $_POST['ProductName'];
-$PNum = $_POST['ProductNumber'];
+$PID = $_GET['DellPROID'];
 
-$sqlUpdate = mysql_query("UPDATE tb_products SET pro_name='$PName', pro_number='$PNum' WHERE pro_id ='$PID'");
+$sqlDel = mysql_query("DELETE FROM tb_souvenir WHERE sou_id ='$PID'");
 
 ?>
 <!DOCTYPE html>
@@ -17,7 +15,7 @@ $sqlUpdate = mysql_query("UPDATE tb_products SET pro_name='$PName', pro_number='
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta http-equiv="Refresh" content="2; url='products.php'" />
+    <meta http-equiv="Refresh" content="2; url='souvenir.php'" />
     <?php include "text_title.php"; ?>
 
     <!-- Custom fonts for this template-->
@@ -51,7 +49,7 @@ $sqlUpdate = mysql_query("UPDATE tb_products SET pro_name='$PName', pro_number='
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
             <?php
-                if($sqlUpdate) {
+                if($sqlDel) {
             ?>
                 <!-- ข้อความแจ้งเตือนการบันทึกข้อมูล -->
                     <div class="col-xl-6 col-md-6">

@@ -3,7 +3,7 @@
 <html lang="en">
 <?php  
 $PID=$_GET['PROID'];
-$showProducts = mysql_query("SELECT * FROM tb_products WHERE pro_id = '$PID'");
+$showProducts = mysql_query("SELECT * FROM tb_souvenir WHERE sou_id = '$PID'");
 $resultProducts = mysql_fetch_array($showProducts);
 ?>
 <head>
@@ -61,17 +61,17 @@ $resultProducts = mysql_fetch_array($showProducts);
                                     <h6 class="m-0 font-weight-bold text-primary">กรุณาใส่ข้อมูลให้ครบถ้วนก่อนคลิกปุ่ม ยืนยัน</h6>
                                 </div>
                                 <div class="card-body">
-                                    <form class="user" method="POST" action="update-Products.php">
+                                    <form class="user" method="POST" action="update-souvenir.php">
                                         <div class="form-group row">
                                             <div class="col-sm-12 mb-3 mb-sm-0">
                                                 <input type="text" class="form-control form-control-user" id="ProductName" name="ProductName"
-                                                    placeholder="ชื่อรายการ" value="<?php echo $resultProducts['pro_name']; ?>" required>
+                                                    placeholder="ชื่อรายการ" value="<?php echo $resultProducts['sou_name']; ?>" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <input type="number" class="form-control form-control-user" id="ProductNumber" name="ProductNumber"
-                                                    placeholder="จำนวน" value="<?php echo $resultProducts['pro_number']; ?>" required>
+                                                    placeholder="จำนวน" value="<?php echo $resultProducts['sou_number']; ?>" required>
                                             </div>
                                         </div>
                                         <input type="hidden" name="oldPROID" value="<?php  echo $PID; ?>">
