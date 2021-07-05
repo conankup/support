@@ -140,7 +140,7 @@
                                                     <div class="modal-body">ท่านแน่ใจแล้วใช่มั้ยที่จะยกเลิกสิทธิ์หัวหน้าส่วน <?php echo $result_User['name']; ?>&nbsp;&nbsp;&nbsp;<?php echo $result_User['lastname'];  ?></div>
                                                     <div class="modal-footer">
                                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                                        <a class="btn btn-primary" href="deleteProducts.php?DellPROID=<?php echo $result_User['user_id']; ?>">Confirm</a>
+                                                        <a class="btn btn-primary" href="changLeader.php?chLeader=<?php echo $result_User['user_id']; ?>">Confirm</a>
                                                     </div>
                                                 </div>
                                             </div>
