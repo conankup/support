@@ -1,7 +1,7 @@
 <?php include"chk_user.php"; ?>
 <?php
 $souid=$_GET['souID'];
-$show_Souvenir = mysql_query("SELECT * FROM tb_souvenir");
+$show_Souvenir = mysql_query("SELECT * FROM tb_souvenir WHERE sou_id ='$souid'");
 $result_Souvenir=mysql_fetch_array($show_Souvenir);
 ?>
 <!DOCTYPE html>
