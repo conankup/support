@@ -1,4 +1,10 @@
 <?php include"chk_user.php"; ?>
+<?php
+$souID = $_POST['oldSouid'];
+$souQ = $_POST['quantity'];
+$souNum = $_POST['oldNumber'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,28 +53,48 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">รายการของที่ต้องการเบิก</h1>
+                    <h1 class="h3 mb-4 text-gray-800">กำลังประมวลผล</h1>
                     <div class="row">
 
-                        <div class="col-lg-4">
-                            <!-- Basic Card Example -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">กรุณาคลิกที่ปุ่มเพื่อนทำรายการ</h6>
-                                </div>
+                    <!-- เชคว่ากรอกจำนวนที่เบิกเกินกว่าจำนวนที่มี -->
+                    <?php if($souQ <= 0 or $souQ > $souNum) { ?>
+
+                        <div class="col-xl-6 col-md-12 mb-4">
+                            <div class="card border-left-danger shadow h-100 py-2">
                                 <div class="card-body">
-                                    <a href="form-takeSouvenir.php" class="btn btn-info btn-icon-split btn-lg">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-cart-plus"></i>
-                                        </span>
-                                        <span class="text">เพิ่มรายการเบิก</span>
-                                    </a>
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-6">
+                                            <div class="text font-weight-bold text-danger text-uppercase mb-1">
+                                                Error</div>
+                                            <div class="h2 mb-0 font-weight-bold text-gray-800">กรุณาอย่ากรอกข้อมูลเล่น ใส่จำนวนเท่าที่มีให้เบิกครับ</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-times fa-2x text-gray-600"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
+                        <meta http-equiv="refresh" content="4;URL=tack-Souvenir.php">
+                        <!-- จบการเชคว่ากรอกจำนวนที่เบิกเกินกว่าจำนวนที่มี -->
+                    <?php }else{ 
+                        // ทำการบันทึกรายการของที่ต้องการเบิก
+                        $sqlSave = mysql_query("INSERT INTO tb_detailtakesouvenir VALUES ('','$sess_id','$souQ','$souID')");
+                            if($sqlSave)
+                            {
+                    ?>                                       
+                            <meta http-equiv="refresh" content="0;URL=tack-Souvenir.php">    
+                    <?php   }else{?>
+                            <div class="alert alert-danger">
+                                <strong>! Error <?php echo $pn; ?> ไม่สามารถทำรายการได้กรุณาทำรายการใหม่อีกครั้ง</strong>
+                            </div>					
+                            <meta http-equiv="refresh" content="4;URL=tack-Souvenir.php">
+                    <?php
+                            }
+                        }
+                    ?>
                     </div>
-
+                  
                 </div>
                 <!-- /.container-fluid -->
 
@@ -89,26 +115,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
