@@ -48,6 +48,25 @@
     ขอรับบริการ
 </div>
 
+<!-- Nav Item - Service -->
+<li class="nav-item">
+    <a class="nav-link" href="service.php">
+        <i class="fas fa-fw fa-heart fa-2x"></i>
+        <span>ขอรับบริการ</span></a>
+</li>
+
+<!-- Nav Item - Record Service -->
+<li class="nav-item">
+    <a class="nav-link" href="#">
+        <i class="fas fa-fw fa-list"></i>
+        <span>ประวัติขอใช้บริการ</span></a>
+</li>
+
+<!-- Heading -->
+<div class="sidebar-heading">
+    ManageUsers
+</div>
+
 <!-- Nav Item - Leader -->
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#leader"
@@ -62,20 +81,6 @@
             <a class="collapse-item" href="signature.php">จัดการข้อมูลรายเซ็นดิจิตอล</a>
         </div>
     </div>
-</li>
-
-<!-- Nav Item - Service -->
-<li class="nav-item">
-    <a class="nav-link" href="service.php">
-        <i class="fas fa-fw fa-heart fa-2x"></i>
-        <span>ขอรับบริการ</span></a>
-</li>
-
-<!-- Nav Item - Record Service -->
-<li class="nav-item">
-    <a class="nav-link" href="#">
-        <i class="fas fa-fw fa-list"></i>
-        <span>ประวัติขอใช้บริการ</span></a>
 </li>
 
 <!-- Divider -->
