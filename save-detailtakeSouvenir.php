@@ -75,7 +75,7 @@ $souNum = $_POST['oldNumber'];
                                 </div>
                             </div>
                         </div>
-                        <meta http-equiv="refresh" content="4;URL=tack-Souvenir.php">
+                        <meta http-equiv="refresh" content="4;URL=take-Souvenir.php">
                         <!-- จบการเชคว่ากรอกจำนวนที่เบิกเกินกว่าจำนวนที่มี -->
                     <?php }else{ 
                         // ทำการบันทึกรายการของที่ต้องการเบิก
@@ -83,12 +83,12 @@ $souNum = $_POST['oldNumber'];
                             if($sqlSave)
                             {
                     ?>                                       
-                            <meta http-equiv="refresh" content="0;URL=tack-Souvenir.php">    
+                            <meta http-equiv="refresh" content="0;URL=take-Souvenir.php">    
                     <?php   }else{?>
                             <div class="alert alert-danger">
                                 <strong>! Error <?php echo $pn; ?> ไม่สามารถทำรายการได้กรุณาทำรายการใหม่อีกครั้ง</strong>
                             </div>					
-                            <meta http-equiv="refresh" content="4;URL=tack-Souvenir.php">
+                            <meta http-equiv="refresh" content="4;URL=take-Souvenir.php">
                     <?php
                             }
                         }

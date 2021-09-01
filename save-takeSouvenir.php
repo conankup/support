@@ -1,7 +1,51 @@
 <?php include"chk_user.php"; ?>
 <?php
-$SOUID = $_GET['DellsouID'];
 
+$detailTake = $_POST['takedetail'];
+$uid=$_SESSION['ses_uid'];
+$daynowEN=date("Y-m-d");
+
+$sqlu=mysql_query("SELECT * FROM tb_users WHERE user_id='$uid'");
+$resultu=mysql_fetch_array($sqlu);
+
+//หาเลขปี
+$yearEng=date("y");
+$yearTH_Now=$yearEng+43;
+$ckmonth=date("n");
+
+if($ckmonth <=9 and $yearTH_Now == $yearEng+43)
+{
+	//echo"old";
+	
+	$yearTH=$yearEng+43;
+	//สร้างเลขรหัส
+	$new_id =mysql_query("SELECT take_id FROM  tb_takesouvenir ORDER BY take_id DESC");//หาไอดีล่าสุดในระบบ
+	$num_tid = mysql_num_rows($new_id); 
+	if($num_tid<=0){ // ถ้าได้เป็นค่าว่าง หรือ null ก็แสดงว่ายังไม่มีข้อมูลในฐานข้อมูล
+		$tid="$yearTH"."0001";
+	}else{
+		$tid = mysql_result($new_id,0,"take_id"); 
+		$tid++;
+	}
+}
+else
+{
+	$yearTH=$yearEng+44;
+	//สร้างเลขรหัส
+	$new_id =mysql_query("SELECT take_id FROM  tb_takesouvenir WHERE NOT take_id LIKE '".$yearTH_Now."%' ORDER BY take_id DESC");//หาไอดีล่าสุดในระบบ
+	$num_tid = mysql_num_rows($new_id); 
+	if($num_tid<=0){ // ถ้าได้เป็นค่าว่าง หรือ null ก็แสดงว่ายังไม่มีข้อมูลในฐานข้อมูล
+		$tid="$yearTH"."0001";
+	}else{
+		$tid = mysql_result($new_id,0,"take_id"); 
+		$tid++;
+	}
+}
+
+
+$sqlSave=mysql_query("INSERT INTO tb_takesouvenir VALUES ('$tid','$daynowEN','$detailTake','1','$uid')");
+						
+$update_dtp=mysql_query("UPDATE tb_detailtakesouvenir SET take_id='$tid',take_session='' where take_session='$sess_id'");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +57,7 @@ $SOUID = $_GET['DellsouID'];
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta http-equiv="Refresh" content="2; url='record-takeSouvenir.php'" />
     <?php include "text_title.php"; ?>
 
     <!-- Custom fonts for this template-->
@@ -46,11 +91,7 @@ $SOUID = $_GET['DellsouID'];
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
             <?php
-               if(empty($SOUID)) 
-            {
-                //ลบทั้งหมด
-                $sql_delAll=mysql_query("DELETE FROM tb_detailtakesouvenir");
-                if($sql_delAll){
+                if($sqlSave) {
             ?>
                 <!-- ข้อความแจ้งเตือนการบันทึกข้อมูล -->
                     <div class="col-xl-6 col-md-6">
@@ -59,7 +100,7 @@ $SOUID = $_GET['DellsouID'];
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="h3 mb-0 font-weight-bold text-success">
-                                                ลบข้อมูลสำเร็จ
+                                                ระบบได้บันทึกข้อมูลเรียบร้อยแล้ว
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -70,18 +111,18 @@ $SOUID = $_GET['DellsouID'];
                             </div>
                     </div>
                 </div>
-                <meta http-equiv="refresh" content="2;URL=take-Souvenir.php">	
+                <!-- /.container-fluid -->
             <?php
                 }else{
             ?>
-                    <!-- ข้อความแจ้งเตือนการบันทึกข้อมูล -->
-                    <div class="col-xl-6 col-md-6">
+                <!-- ข้อความแจ้งเตือนการบันทึกข้อมูล -->
+                <div class="col-xl-6 col-md-6">
                             <div class="card border-left-danger shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="h3 mb-0 font-weight-bold text-danger">
-                                                เกิดข้อผิดพลาดระบบไม่สามารถลบข้อมูลได้
+                                                เกิดข้อผิดพลาดระบบไม่สามารถบันทึกข้อมูลได้
                                             </div>
                                         </div>
                                         <div class="col-auto">
@@ -92,57 +133,9 @@ $SOUID = $_GET['DellsouID'];
                             </div>
                     </div>
                 </div>
-            
             <?php  
-                    } 
-            }else{ 
-            //ลบทีละรายการ 
-                $sql_del=mysql_query("DELETE FROM tb_detailtakesouvenir WHERE ref_sou_id='$SOUID'");
-                if($sql_del){
-            ?>
-                <!-- ข้อความแจ้งเตือนการบันทึกข้อมูล -->
-                <div class="col-xl-6 col-md-6">
-                    <div class="card border-left-success shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="h3 mb-0 font-weight-bold text-success">
-                                        ลบข้อมูลสำเร็จ
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-check fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                <meta http-equiv="refresh" content="2;URL=take-Souvenir.php">	
-                <?php
-                }else{
-                ?>
-                <!-- ข้อความแจ้งเตือนการบันทึกข้อมูล -->
-                <div class="col-xl-6 col-md-6">
-                    <div class="card border-left-danger shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="h3 mb-0 font-weight-bold text-danger">
-                                    เกิดข้อผิดพลาดระบบไม่สามารถลบข้อมูลได้
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-check fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            <?php
                 }
-            } exit();
+                exit();
             ?>
             </div>
             <!-- End of Main Content -->

@@ -34,9 +34,14 @@
         <span>จัดการข้อมูลของที่เบิกได้</span></a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="tack-Souvenir.php">
+    <a class="nav-link" href="take-Souvenir.php">
         <i class="fas fa-fw fa-list fa-2x"></i>
         <span>เบิกของที่ระลึก</span></a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="record-takeSouvenir.php">
+        <i class="far fa-list-alt fa-2x"></i>
+        <span>ประวัติรายการเบิก</span></a>
 </li>
 
 

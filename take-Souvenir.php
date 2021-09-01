@@ -147,8 +147,15 @@
                                 </span>
                                 <span class="text">ลบทุกรายการ</span>
                             </a>
+                    
+                            <a href="cf-takeSouvenir.php" class="btn btn-success btn-icon-split btn-lg">
+                                <span class="icon text-white-50">
+                                <i class="fas fa-check"></i>
+                                </span>
+                                <span class="text">ยืนยันรายการเบิก</span>
+                            </a>
                         </div>
-                    </div>        
+                    </div>          
                 <?php } ?>	
                                             
                 </div>
