@@ -14,8 +14,8 @@
 			while ($data = mysql_fetch_array($check_log) ) 
 				{
 					$sess_id=session_id();
-					$_SESSION[ses_privilage] = $data["privilage"];     //สร้าง session สำหรับเก็บค่า สถานะความเป็น Admin
-					$_SESSION[ses_uid] = $data["user_id"];
+					$_SESSION[ses_privilage] = $data['privilage'];     //สร้าง session สำหรับเก็บค่า สถานะความเป็น Admin
+					$_SESSION[ses_uid] = $data['user_id'];
 					$date_time = date("Y-m-d H:i:s");
 					$last_login = $data['now_login'];
 					$now_login = $date_time;

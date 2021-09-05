@@ -61,9 +61,10 @@ $dateToday = date("Y-m-d");
                             </div>
                         </div>
                     </div>  
+                    <meta http-equiv="refresh" content="2;URL=login.php">  
                 <?php
                 }else{
-					$sqlAddRegister = mysql_query("insert into tb_users values ('','$inputEmail','$inputInPWD','$inputName','$inputLname','2','$inputJobID','$dateToday','','')");
+					$sqlAddRegister = mysql_query("insert into tb_users values ('','$inputEmail','$inputInPWD','$inputName','$inputLname','2','null','$inputJobID','$dateToday','','')");
 					if($sqlAddRegister){	
 				?>	
                     <div class="card-body p-0">

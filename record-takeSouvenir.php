@@ -3,6 +3,19 @@
 $uid=$_SESSION['ses_uid'];
 $sqlUser=mysql_query("SELECT * FROM tb_users WHERE user_id='$uid'");
 $resultUser=mysql_fetch_array($sqlUser);
+$Jid = $resultUser['ref_job_id'];
+$checkPrivilage = $resultUser['privilage'];
+//find id Sector
+$sqlFindSector = mysql_query("SELECT * FROM tb_job RIGHT JOIN tb_sector ON tb_job.ref_sector_id = tb_sector.sector_id WHERE job_id='$Jid'");
+$resultFindSector = mysql_fetch_array($sqlFindSector);
+
+if($checkPrivilage == 5){
+    $nameShowTitle = $resultFindSector['sector_name'];
+}else{
+    $nameShowTitle = $resultUser['name']." ".$resultUser['lastname'];
+   
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -58,7 +71,7 @@ $resultUser=mysql_fetch_array($sqlUser);
                     <!-- DataTales -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">ข้อมูลรายการของ <?php echo $resultUser['name'];  ?> &nbsp; <?php echo $resultUser['lastname'];  ?></h6>
+                            <h6 class="m-0 font-weight-bold text-primary">ข้อมูลรายการของ <?php echo $nameShowTitle;  ?></h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -84,9 +97,12 @@ $resultUser=mysql_fetch_array($sqlUser);
                                         while($result_takeSouvenir=mysql_fetch_array($show_takeSouvenir)){
                                         $takeStatus = $result_takeSouvenir['take_status'];      
                                         if($takeStatus == '1'){
-                                            $textStatus = "รอดำเนินการ";
+                                            $textStatus = "รอหัวหน้าส่วนอนุมัติ";
                                             $btColor = "warning";
                                         }else if($takeStatus == '2'){
+                                            $textStatus = "รอดำเนินการ";
+                                            $btColor = "warning";
+                                        }else if($takeStatus == '3'){
                                             $textStatus = "ดำเนินการสำเร็จ";
                                             $btColor = "success";
                                         }else if($takeStatus == '0'){
@@ -96,9 +112,9 @@ $resultUser=mysql_fetch_array($sqlUser);
                                         $TakeID = $result_takeSouvenir['take_id'];
                                     ?>
                                         <tr>
-                                            <td><a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#showDetail-<?php echo $TakeID;?>"><?php echo $TakeID; ?></a></td>
+                                            <td><a href="#" class="btn btn-info btn-lg" data-toggle="modal" data-target="#showDetail-<?php echo $TakeID;?>"><?php echo $TakeID; ?></a></td>
                                             <td><?php echo $result_takeSouvenir['take_date']; ?></td>                                            
-                                            <td><button type="button" class="btn btn-<?php echo $btColor; ?> btn-block"><?php echo $textStatus; ?></button></td>
+                                            <td><button type="button" class="btn btn-<?php echo $btColor; ?> btn-lg"><?php echo $textStatus; ?></button></td>
                                         </tr>
 
 

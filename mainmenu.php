@@ -28,11 +28,13 @@
 </div>
 
 <!-- Nav Item - ของที่มีให้เบิก -->
+<?php if($_SESSION[ses_privilage] == 1){?>
 <li class="nav-item">
     <a class="nav-link" href="souvenir.php">
         <i class="fas fa-fw fa-list fa-2x"></i>
         <span>จัดการข้อมูลของที่เบิกได้</span></a>
 </li>
+<?php } ?>
 <li class="nav-item">
     <a class="nav-link" href="take-Souvenir.php">
         <i class="fas fa-fw fa-list fa-2x"></i>
@@ -67,6 +69,7 @@
         <span>ประวัติขอใช้บริการ</span></a>
 </li>
 
+<?php if($_SESSION[ses_privilage] == 1){?>
 <!-- Heading -->
 <div class="sidebar-heading">
     ManageUsers
@@ -87,7 +90,7 @@
         </div>
     </div>
 </li>
-
+<?php } ?>
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">
 
