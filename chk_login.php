@@ -20,7 +20,7 @@
 					$last_login = $data['now_login'];
 					$now_login = $date_time;
 					$sql_login = mysql_query("update tb_users set last_login='$last_login',now_login='$now_login' where user_email='$em' ");
-					echo"<meta http-equiv='refresh' content='0;URL=leader.php'>";
+					echo"<meta http-equiv='refresh' content='0;URL=dashboard.php'>";
 				}
 	}
 
