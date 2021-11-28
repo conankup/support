@@ -13,11 +13,25 @@
 <hr class="sidebar-divider my-0">
 
 <!-- Nav Item - Dashboard -->
-<li class="nav-item">
-    <a class="nav-link" href="dashboard.php">
+<?php if($_SESSION[ses_privilage] == 5){  //หัวหน้าส่วน?> 
+    <li class="nav-item">
+        <a class="nav-link" href="dashboardManager.php">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
-</li>
+    </li>
+<?php }elseif($_SESSION[ses_privilage] == 4 or $_SESSION[ses_privilage] == 1){ //ส่วนส่งเสริม?>
+    <li class="nav-item">
+        <a class="nav-link" href="dashboard.php">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Dashboard</span></a>
+    </li>
+<?php }elseif($_SESSION[ses_privilage] == 2){ //ผู้ใช้ทั่วไป?>
+    <li class="nav-item">
+        <a class="nav-link" href="dashboardUsers.php">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Dashboard</span></a>
+    </li>
+<?php } ?>
 
 <!-- Divider -->
 <hr class="sidebar-divider">

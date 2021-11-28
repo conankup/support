@@ -1,5 +1,4 @@
 <?php include"chk_user.php"; ?>
-<?php include_once("checkPrivilageUsers.php") ?>
 <?php
 $uid=$_SESSION['ses_uid'];
 $sqlUser=mysql_query("SELECT * FROM tb_users WHERE user_id='$uid'");
@@ -67,12 +66,12 @@ if($checkPrivilage == 5){
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">รายการเบิกที่รอดำเนินการ</h1>              
+                    <h1 class="h3 mb-4 text-gray-800">ประวัติการเบิกของ</h1>              
 
                     <!-- DataTales -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">รายการเบิก</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">ข้อมูลรายการของ <?php echo $nameShowTitle;  ?></h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -98,7 +97,7 @@ if($checkPrivilage == 5){
                                     <tbody>
                                     <?php
                                         //SELECT * FROM tb_takesouvenir RIGHT JOIN tb_users ON tb_takesouvenir.ref_user_id = tb_users.user_id RIGHT JOIN tb_job ON tb_users.ref_job_id = tb_job.job_id WHERE job_id='$SectorID'
-                                        $show_takeSouvenir = mysql_query("SELECT * FROM tb_takesouvenir LEFT JOIN tb_users ON tb_takesouvenir.ref_user_id = tb_users.user_id LEFT JOIN tb_job ON tb_users.ref_job_id = tb_job.job_id WHERE take_status='2'");
+                                        $show_takeSouvenir = mysql_query("SELECT * FROM tb_takesouvenir LEFT JOIN tb_users ON tb_takesouvenir.ref_user_id = tb_users.user_id LEFT JOIN tb_job ON tb_users.ref_job_id = tb_job.job_id WHERE ref_sector_id='$SectorID'");
                                         while($result_takeSouvenir=mysql_fetch_array($show_takeSouvenir)){
                                         $takeStatus = $result_takeSouvenir['take_status'];      
                                         if($takeStatus == '1'){
@@ -124,22 +123,29 @@ if($checkPrivilage == 5){
                                             <td><?php echo $result_takeSouvenir['name']; ?>&nbsp;&nbsp;&nbsp;<?php echo $result_takeSouvenir['lastname']; ?></td>  
                                             <td><?php echo $result_takeSouvenir['take_date']; ?></td>                                            
                                             <td><button type="button" class="btn btn-<?php echo $btColor; ?> btn-lg"><?php echo $textStatus; ?></button></td>
-                                            <td><!-- หัวหน้าส่งเสริมอนุมัติให้เบิก -->
+                                            <td>
+                                            <?php
+                                                if($takeStatus == '1'){
+                                            ?>
+                                                <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modalNo-<?php echo $TakeID;?>">ไม่อนุมัติ</a>&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalYes-<?php echo $TakeID;?>">อนุมัติ</a>
+                                            <?php }else if($takeStatus == '4'){  ?>
+                                                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalYes-<?php echo $TakeID;?>">อนุมัติ</a>
+                                            <?php } ?>
                                             </td>
                                         </tr>
 
 
-                                        <!-- showDetailtakeSou-->
+                                        <!-- Delete showDetailtakeSou-->
                                         <?php
                                             $sqlshowlist = mysql_query("SELECT * FROM tb_detailtakesouvenir RIGHT JOIN tb_souvenir ON tb_detailtakesouvenir.ref_sou_id = tb_souvenir.sou_id WHERE take_id ='$TakeID'");
                                         ?>
-                                        <div class="modal fade" id="showDetail-<?php echo $TakeID;?>" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+                                        <div class="modal fade" id="showDetail-<?php echo $TakeID;?>" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLabel"
                                             aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="ModalLabel">รายละเอียดรายการที่เบิก</h5>
+                                                        <h5 class="modal-title" id="DeleteModalLabel">รายละเอียดรายการที่เบิก</h5>
                                                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">×</span>
                                                         </button>
