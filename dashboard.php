@@ -82,6 +82,7 @@ if($checkPrivilage == 5){
                                             <th>ผู้ทำรายการ</th>
                                             <th>วันที่ทำรายการ</th>                            
                                             <th>สถานะ</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -90,6 +91,7 @@ if($checkPrivilage == 5){
                                             <th>ผู้ทำรายการ</th>
                                             <th>วันที่ทำรายการ</th>                            
                                             <th>สถานะ</th>
+                                            <th>Action</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -103,21 +105,34 @@ if($checkPrivilage == 5){
                                             $btColor = "warning";
                                         }else if($takeStatus == '2'){
                                             $textStatus = "รอดำเนินการ";
-                                            $btColor = "warning";
+                                            $btColor = "info";
                                         }else if($takeStatus == '3'){
                                             $textStatus = "ดำเนินการสำเร็จ";
                                             $btColor = "success";
                                         }else if($takeStatus == '0'){
                                             $textStatus = "ยกเลิกรายการ";
                                             $btColor = "danger";
+                                        }else if($takeStatus = '4'){
+                                            $textStatus = "ไม่อนุมัติ";
+                                            $btColor = "danger";
                                         }
                                         $TakeID = $result_takeSouvenir['take_id'];
                                     ?>
                                         <tr>
                                             <td><a href="#" class="btn btn-info btn-lg" data-toggle="modal" data-target="#showDetail-<?php echo $TakeID;?>"><?php echo $TakeID; ?></a></td>
-                                            <td><?php echo $result_takeSouvenir['take_date']; ?></td>  
+                                            <td><?php echo $result_takeSouvenir['name']; ?>&nbsp;&nbsp;&nbsp;<?php echo $result_takeSouvenir['lastname']; ?></td>  
                                             <td><?php echo $result_takeSouvenir['take_date']; ?></td>                                            
                                             <td><button type="button" class="btn btn-<?php echo $btColor; ?> btn-lg"><?php echo $textStatus; ?></button></td>
+                                            <td>
+                                            <?php
+                                                if($takeStatus == '1'){
+                                            ?>
+                                                <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modalNo-<?php echo $TakeID;?>">ไม่อนุมัติ</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalYes-<?php echo $TakeID;?>">อนุมัติ</a>
+                                            <?php }else if($takeStatus == '4'){  ?>
+                                                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalYes-<?php echo $TakeID;?>">อนุมัติ</a>
+                                            <?php } ?>
+                                            </td>
                                         </tr>
 
 
@@ -149,6 +164,51 @@ if($checkPrivilage == 5){
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <!-- Modal Action No -->
+                                        <div class="modal fade" id="modalNo-<?php echo $TakeID;?>" tabindex="-1" role="dialog" aria-labelledby="ModalNo"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="DeleteModalLabel">ยืนยันสถานะการอนุมัติ</h5>
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <label for="testNo">ไม่อนุมัติรายการที่ขอ</label>                                                                                                 
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="update-statusTakeSouvenir.php?TakeID=<?php echo $TakeID; ?>&TS=4" class="btn btn-success">ยืนยัน</a> 
+                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Modal Action Yes -->
+                                        <div class="modal fade" id="modalYes-<?php echo $TakeID;?>" tabindex="-1" role="dialog" aria-labelledby="ModalYes"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="DeleteModalLabel">ยืนยันสถานะการอนุมัติ</h5>
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <label for="testNo">อนุมัติรายการที่ขอ</label>                                                                                                 
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="update-statusTakeSouvenir.php?TakeID=<?php echo $TakeID; ?>&TS=2" class="btn btn-success">ยืนยัน</a> 
+                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>        
+
 
                                     <?php } ?>                                                                                                                                                    
                                     </tbody>
