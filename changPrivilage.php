@@ -1,8 +1,8 @@
 <?php include"chk_user.php"; ?>
 <?php
-$userID = $_GET['UID'];
+$userID = $_GET["UID"];
 
-$sqlUpdate = mysql_query("UPDATE tb_users SET privilage='5' WHERE user_id ='$userID'");
+$sqlUpdate = mysqli_query($con,"UPDATE tb_users SET privilage='5' WHERE user_id ='$userID'");
 
 ?>
 <!DOCTYPE html>

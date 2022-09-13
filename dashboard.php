@@ -1,19 +1,19 @@
-<?php include"chk_user.php"; ?>
+<?php include "chk_user.php"; ?>
 <?php include_once("checkPrivilageUsers.php") ?>
 <?php
-$uid=$_SESSION['ses_uid'];
-$sqlUser=mysql_query("SELECT * FROM tb_users WHERE user_id='$uid'");
-$resultUser=mysql_fetch_array($sqlUser);
-$Jid = $resultUser['ref_job_id'];
-$checkPrivilage = $resultUser['privilage'];
+$uid=$_SESSION["ses_uid"];
+$sqlUser=mysqli_query($con,"SELECT * FROM tb_users WHERE user_id='$uid'");
+$resultUser=mysqli_fetch_array($sqlUser);
+$Jid = $resultUser["ref_job_id"];
+$checkPrivilage = $resultUser["privilage"];
 //find id Sector
-$sqlFindSector = mysql_query("SELECT * FROM tb_job RIGHT JOIN tb_sector ON tb_job.ref_sector_id = tb_sector.sector_id WHERE job_id='$Jid'");
-$resultFindSector = mysql_fetch_array($sqlFindSector);
-$SectorID = $resultFindSector['sector_id'];
+$sqlFindSector = mysqli_query($con,"SELECT * FROM tb_job RIGHT JOIN tb_sector ON tb_job.ref_sector_id = tb_sector.sector_id WHERE job_id='$Jid'");
+$resultFindSector = mysqli_fetch_array($sqlFindSector);
+$SectorID = $resultFindSector["sector_id"];
 if($checkPrivilage == 5){
-    $nameShowTitle = $resultFindSector['sector_name'];
+    $nameShowTitle = $resultFindSector["sector_name"];
 }else{
-    $nameShowTitle = $resultUser['name']." ".$resultUser['lastname'];
+    $nameShowTitle = $resultUser["name"]." ".$resultUser["lastname"];
    
 }
 
@@ -98,9 +98,9 @@ if($checkPrivilage == 5){
                                     <tbody>
                                     <?php
                                         //SELECT * FROM tb_takesouvenir RIGHT JOIN tb_users ON tb_takesouvenir.ref_user_id = tb_users.user_id RIGHT JOIN tb_job ON tb_users.ref_job_id = tb_job.job_id WHERE job_id='$SectorID'
-                                        $show_takeSouvenir = mysql_query("SELECT * FROM tb_takesouvenir LEFT JOIN tb_users ON tb_takesouvenir.ref_user_id = tb_users.user_id LEFT JOIN tb_job ON tb_users.ref_job_id = tb_job.job_id WHERE take_status='2'");
-                                        while($result_takeSouvenir=mysql_fetch_array($show_takeSouvenir)){
-                                        $takeStatus = $result_takeSouvenir['take_status'];      
+                                        $show_takeSouvenir = mysqli_query($con,"SELECT * FROM tb_takesouvenir LEFT JOIN tb_users ON tb_takesouvenir.ref_user_id = tb_users.user_id LEFT JOIN tb_job ON tb_users.ref_job_id = tb_job.job_id WHERE take_status='2'");
+                                        while($result_takeSouvenir=mysqli_fetch_array($show_takeSouvenir)){
+                                        $takeStatus = $result_takeSouvenir["take_status"];      
                                         if($takeStatus == '1'){
                                             $textStatus = "รอหัวหน้าส่วนอนุมัติ";
                                             $btColor = "warning";
@@ -117,12 +117,12 @@ if($checkPrivilage == 5){
                                             $textStatus = "ไม่อนุมัติ";
                                             $btColor = "danger";
                                         }
-                                        $TakeID = $result_takeSouvenir['take_id'];
+                                        $TakeID = $result_takeSouvenir["take_id"];
                                     ?>
                                         <tr>
                                             <td><a href="#" class="btn btn-info btn-lg" data-toggle="modal" data-target="#showDetail-<?php echo $TakeID;?>"><?php echo $TakeID; ?></a></td>
-                                            <td><?php echo $result_takeSouvenir['name']; ?>&nbsp;&nbsp;&nbsp;<?php echo $result_takeSouvenir['lastname']; ?></td>  
-                                            <td><?php echo $result_takeSouvenir['take_date']; ?></td>                                            
+                                            <td><?php echo $result_takeSouvenir["name"]; ?>&nbsp;&nbsp;&nbsp;<?php echo $result_takeSouvenir["lastname"]; ?></td>  
+                                            <td><?php echo $result_takeSouvenir["take_date"]; ?></td>                                            
                                             <td><button type="button" class="btn btn-<?php echo $btColor; ?> btn-lg"><?php echo $textStatus; ?></button></td>
                                             <td><!-- หัวหน้าส่งเสริมอนุมัติให้เบิก -->
                                                 <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modalYes-<?php echo $TakeID;?>">อนุมัติ</a>
@@ -132,7 +132,7 @@ if($checkPrivilage == 5){
 
                                         <!-- showDetailtakeSou-->
                                         <?php
-                                            $sqlshowlist = mysql_query("SELECT * FROM tb_detailtakesouvenir RIGHT JOIN tb_souvenir ON tb_detailtakesouvenir.ref_sou_id = tb_souvenir.sou_id WHERE take_id ='$TakeID'");
+                                            $sqlshowlist = mysqli_query($con,"SELECT * FROM tb_detailtakesouvenir RIGHT JOIN tb_souvenir ON tb_detailtakesouvenir.ref_sou_id = tb_souvenir.sou_id WHERE take_id ='$TakeID'");
                                         ?>
                                         <div class="modal fade" id="showDetail-<?php echo $TakeID;?>" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
                                             aria-hidden="true">
@@ -146,9 +146,9 @@ if($checkPrivilage == 5){
                                                     </div>
                                                     <div class="modal-body">
                                                         <?php  
-                                                        while($result_showlist=mysql_fetch_array($sqlshowlist)){
+                                                        while($result_showlist=mysqli_fetch_array($sqlshowlist)){
                                                         ?>
-                                                            <?php echo $result_showlist['sou_name']; ?> : <?php echo $result_showlist['take_quantity'];?><br>
+                                                            <?php echo $result_showlist["sou_name"]; ?> : <?php echo $result_showlist["take_quantity"];?><br>
                                                         <?php } ?>
                                                                                                  
                                                     </div>

@@ -1,8 +1,8 @@
 <?php include"chk_user.php"; ?>
 <?php
 $uid=$_SESSION["ses_uid"];
-$sql_user=mysql_query("SELECT * FROM tb_users WHERE user_id='$uid'");
-$result_user=mysql_fetch_array($sql_user);
+$sql_user=mysqli_query($con,"SELECT * FROM tb_users WHERE user_id='$uid'");
+$result_user=mysqli_fetch_array($sql_user);
 ?>
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -18,7 +18,7 @@ $result_user=mysql_fetch_array($sql_user);
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $result_user['name']; ?>&nbsp;&nbsp;&nbsp;<?php echo $result_user['lastname'];  ?></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $result_user["name"]; ?>&nbsp;&nbsp;&nbsp;<?php echo $result_user['lastname'];  ?></span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>

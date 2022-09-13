@@ -13,19 +13,19 @@
 <hr class="sidebar-divider my-0">
 
 <!-- Nav Item - Dashboard -->
-<?php if($_SESSION[ses_privilage] == 5){  //หัวหน้าส่วน?> 
+<?php if($_SESSION["ses_privilage"] == 5){  //หัวหน้าส่วน?> 
     <li class="nav-item">
         <a class="nav-link" href="dashboardManager.php">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
     </li>
-<?php }elseif($_SESSION[ses_privilage] == 4 or $_SESSION[ses_privilage] == 1){ //ส่วนส่งเสริม?>
+<?php }elseif($_SESSION["ses_privilage"] == 4 or $_SESSION["ses_privilage"] == 1){ //ส่วนส่งเสริม?>
     <li class="nav-item">
         <a class="nav-link" href="dashboard.php">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
     </li>
-<?php }elseif($_SESSION[ses_privilage] == 2){ //ผู้ใช้ทั่วไป?>
+<?php }elseif($_SESSION["ses_privilage"] == 2){ //ผู้ใช้ทั่วไป?>
     <li class="nav-item">
         <a class="nav-link" href="dashboardUsers.php">
         <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -42,7 +42,7 @@
 </div>
 
 <!-- Nav Item - ของที่มีให้เบิก -->
-<?php if($_SESSION[ses_privilage] == 1){?>
+<?php if($_SESSION["ses_privilage"] == 1){?>
 <li class="nav-item">
     <a class="nav-link" href="souvenir.php">
         <i class="fas fa-fw fa-list fa-2x"></i>
@@ -83,7 +83,7 @@
         <span>ประวัติขอใช้บริการ</span></a>
 </li>
 
-<?php if($_SESSION[ses_privilage] == 1){?>
+<?php if($_SESSION["ses_privilage"] == 1){?>
 <!-- Heading -->
 <div class="sidebar-heading">
     ManageUsers
